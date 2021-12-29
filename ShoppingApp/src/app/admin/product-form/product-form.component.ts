@@ -52,12 +52,4 @@ export class ProductFormComponent implements OnInit {
     }
     this.router.navigate(['admin/products']);
   }
-
-  // updateProduct(name:String, product:any){
-  //   this.productCatalogService.updateProduct(name, product)
-  //     .subscribe((res:any) => console.log(res));
-
-  //   this.router.navigate(['admin/products']);
-  // }
-
 }
