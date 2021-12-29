@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8f6cbf9f-b84e-473a-9c41-dfad2858b2be/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/TKN-Shoppe",
+    "appService.deploySubpath": "."
+}

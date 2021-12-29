@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm" (ngSubmit)="save(f.value)">
+      <!-- 5 input fields -->
+      <!-- name, category, price, stock and imageURL -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          #_id="ngModel"
+          [(ngModel)]="productItem._id"
+          name="_id"
+          id="_id"
+        />
+        <label for="name">Name</label>
+        <!-- Template variable to check if the value entered in the form is valid or not -->
+        <input
+          #name="ngModel"
+          [(ngModel)]="productItem.name"
+          name="name"
+          id="name"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+      <!-- The required field validator -->
+      <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+        Name is required
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select
+          #category="ngModel"
+          [(ngModel)]="productItem.category"
+          name="category"
+          id="category"
+          class="form-control"
+          required
+        >
+          <option value=""></option>
+          <option
+            *ngFor="let category of categories$ | async"
+            [value]="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+        <div
+          class="alert alert-danger"
+          *ngIf="category.touched && category.invalid"
+        >
+          Category is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+          <span class="input-group-text">£</span>
+          <input
+            #price="ngModel"
+            [(ngModel)]="productItem.price"
+            name="price"
+            id="price"
+            type="text"
+            class="form-control"
+            required
+            [min]="0"
+            [max]="50"
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+          <div *ngIf="price.errors?.['required']">Price is required</div>
+          <div *ngIf="price.errors?.['min'] || price.errors?.['max']">
+            Price should be from 0 to 50
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input
+          #stock="ngModel"
+          [(ngModel)]="productItem.stock"
+          name="stock"
+          id="stock"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="stock.touched && stock.invalid">
+          Stock is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imageURL">Image URL</label>
+        <input
+          #imageURL="ngModel"
+          [(ngModel)]="productItem.imageURL"
+          name="imageURL"
+          id="imageURL"
+          type="text"
+          class="form-control"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+
+  <div class="col-md-2">
+    <div class="card" style="width: 18rem">
+      <img
+        [src]="productItem.imageURL"
+        class="card-img-top"
+        alt="Product Image"
+        *ngIf="productItem.imageURL"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ productItem.name }}</h5>
+        <p class="card-text">
+          {{ productItem.price?.toString() | currency: "GBP":true }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

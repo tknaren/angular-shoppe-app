@@ -1,0 +1,11 @@
+<bg-navbar
+  [loginDisplay]="loginDisplay"
+  [displayName]="displayName"
+  (navLogin)="login($event)"
+  (navLogout)="logout($event)"
+  (fetchProfile)="getProfile($event)"
+></bg-navbar>
+<main class="container">
+  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+  <router-outlet *ngIf="!isIframe"></router-outlet>
+</main>
