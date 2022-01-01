@@ -58,9 +58,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BrowserAnimationsModule,    
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
-        clientId: '7766984a-b2b5-4713-9107-2528811ad465', // This is your client ID
-        authority: 'https://login.microsoftonline.com/consumers', // This is your tenant ID
-        redirectUri: 'http://localhost:4200'// This is your redirect URI
+        clientId: environment.ShopAPI.clientId, // This is your client ID
+        authority: environment.ShopAPI.authority, // This is your tenant ID
+        redirectUri: environment.ShopAPI.redirectUri// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -74,7 +74,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
       protectedResourceMap: new Map([ 
-          ['https://graph.microsoft.com/v1.0/me', ['user.read','','profile']]
+          [environment.ShopAPI.graph_endpoint, ['user.read','','profile']]
       ])
     })
   ],

@@ -4,9 +4,10 @@ import { Component, OnInit, OnDestroy, Inject, EventEmitter, createNgModuleRef }
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+const GRAPH_ENDPOINT = environment.ShopAPI.graph_endpoint;
 
 type ProfileType = {
   givenName?: string,
@@ -21,7 +22,7 @@ type ProfileType = {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'ShoppingApp';
+  title = environment.ShopAPI.title;
   isIframe = false;
   loginDisplay = false;  
   profile!:ProfileType;
@@ -72,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout(event:any) { // Add log out function here
     this.authService.logoutRedirect({
-      postLogoutRedirectUri: 'http://localhost:4200'
+      postLogoutRedirectUri: environment.ShopAPI.redirectUri
     });
   }  
 
